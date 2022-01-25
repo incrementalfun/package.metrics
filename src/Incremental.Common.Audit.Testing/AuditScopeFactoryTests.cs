@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Incremental.Common.Audit.Events;
 using Incremental.Common.Audit.Store;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;

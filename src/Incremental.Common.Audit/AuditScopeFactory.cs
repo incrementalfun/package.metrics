@@ -1,3 +1,4 @@
+using Incremental.Common.Audit.Events;
 using Incremental.Common.Audit.Store;
 using Microsoft.Extensions.Logging;
 

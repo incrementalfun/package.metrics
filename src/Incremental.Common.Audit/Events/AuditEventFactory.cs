@@ -1,4 +1,4 @@
-namespace Incremental.Common.Audit;
+namespace Incremental.Common.Audit.Events;
 
 public class AuditEventFactory : IAuditEventFactory
 {
