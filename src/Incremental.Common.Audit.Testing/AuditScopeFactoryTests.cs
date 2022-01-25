@@ -15,7 +15,8 @@ public class AuditScopeFactoryTests
     {
         _auditScopeFactory = new AuditScopeFactory(
             logger: new NullLogger<AuditScopeFactory>(),
-            auditStore: new Mock<IAuditStore>().Object);
+            auditStore: new Mock<IAuditStore>().Object,
+            auditEventFactory: new AuditEventFactory());
     }
 
     [Test]
