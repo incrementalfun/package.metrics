@@ -1,6 +1,6 @@
 namespace Incremental.Common.Audit;
 
-public class IAuditScope
+public interface IAuditScope : IAsyncDisposable
 {
     
 }
