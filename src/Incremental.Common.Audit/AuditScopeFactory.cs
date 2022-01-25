@@ -1,4 +1,5 @@
 using Incremental.Common.Audit.Events;
+using Incremental.Common.Audit.Events.WellKnown;
 using Incremental.Common.Audit.Store;
 using Microsoft.Extensions.Logging;
 
@@ -17,11 +18,17 @@ public class AuditScopeFactory : IAuditScopeFactory
         _auditEventFactory = auditEventFactory;
     }
 
+    public async Task<IAuditScope> CreateScopeAsync<TAuditEvent>(CancellationToken cancellationToken = default) 
+        where TAuditEvent : AuditEvent, new()
+    {
+        return await new AuditScope<TAuditEvent>(
+                store: _auditStore, 
+                @event: await _auditEventFactory.CreateAuditEventAsync<TAuditEvent>(cancellationToken))
+            .StartAsync(cancellationToken);
+    }
+    
     public async Task<IAuditScope> CreateScopeAsync(CancellationToken cancellationToken = default)
     {
-        return await new AuditScope(
-                store: _auditStore, 
-                @event: await _auditEventFactory.CreateAuditEventAsync(cancellationToken))
-            .StartAsync(cancellationToken);
+        return await CreateScopeAsync<BasicAuditEvent>(cancellationToken);
     }
 }
