@@ -5,5 +5,4 @@ namespace Incremental.Common.Audit;
 public interface IAuditScopeFactory
 {
     Task<IAuditScope> CreateScopeAsync<TAuditEvent>(string eventName, CancellationToken cancellationToken = default) where TAuditEvent : AuditEvent, new();
-    Task<IAuditScope> CreateScopeAsync(string eventName, CancellationToken cancellationToken = default);
 }

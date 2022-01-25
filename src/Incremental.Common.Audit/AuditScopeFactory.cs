@@ -26,9 +26,4 @@ public class AuditScopeFactory : IAuditScopeFactory
                 @event: await _auditEventFactory.CreateAuditEventAsync<TAuditEvent>(eventName,cancellationToken))
             .StartAsync(cancellationToken);
     }
-    
-    public async Task<IAuditScope> CreateScopeAsync(string eventName, CancellationToken cancellationToken = default)
-    {
-        return await CreateScopeAsync<BasicAuditEvent>(eventName, cancellationToken);
-    }
 }

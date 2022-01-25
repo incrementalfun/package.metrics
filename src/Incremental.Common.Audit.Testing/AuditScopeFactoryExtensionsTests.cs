@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Incremental.Common.Audit.Events;
 using Incremental.Common.Audit.Events.WellKnown;
+using Incremental.Common.Audit.Extensions;
 using Incremental.Common.Audit.Store;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
@@ -8,7 +9,7 @@ using NUnit.Framework;
 
 namespace Incremental.Common.Audit.Testing;
 
-public class AuditScopeFactoryTests
+public class AuditScopeFactoryExtensionsTests
 {
     private IAuditScopeFactory _auditScopeFactory = null!;
     private readonly Mock<IAuditStore> _auditStoreMock = new();
@@ -23,23 +24,13 @@ public class AuditScopeFactoryTests
     }
 
     [Test]
-    public async Task Creates_AuditScope()
+    public async Task Creates_AuditScope_With_Default_Event()
     {
-        var auditScope = await _auditScopeFactory.CreateScopeAsync<BasicAuditEvent>("testEvent");
-        
-        Assert.IsNotNull(auditScope);
-    }
-    
-    [Test]
-    public async Task Creates_AuditScope_With_Generic_AuditEvent()
-    {
-        await using (var unused = await _auditScopeFactory.CreateScopeAsync<TestingAuditEvent>("testEvent"))
+        await using (var unused = await _auditScopeFactory.CreateScopeAsync("testEvent"))
         {
             
         }
         
-        _auditStoreMock.Verify(m => m.SaveAsync(It.IsAny<TestingAuditEvent>(), default));
+        _auditStoreMock.Verify(m => m.SaveAsync(It.IsAny<BasicAuditEvent>(), default));
     }
-
-    private sealed class TestingAuditEvent : AuditEvent { }
 }
