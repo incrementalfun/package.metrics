@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Common.Audit", "Incremental.Common.Audit\Incremental.Common.Audit.csproj", "{0624F3FC-3E6B-4B39-899D-4AF5B5C12C4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Common.Audit.Testing", "Incremental.Common.Audit.Testing\Incremental.Common.Audit.Testing.csproj", "{21AE5FDD-CBF7-4EE3-BC94-FF7EA4F06B92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{0624F3FC-3E6B-4B39-899D-4AF5B5C12C4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0624F3FC-3E6B-4B39-899D-4AF5B5C12C4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0624F3FC-3E6B-4B39-899D-4AF5B5C12C4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21AE5FDD-CBF7-4EE3-BC94-FF7EA4F06B92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21AE5FDD-CBF7-4EE3-BC94-FF7EA4F06B92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21AE5FDD-CBF7-4EE3-BC94-FF7EA4F06B92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21AE5FDD-CBF7-4EE3-BC94-FF7EA4F06B92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
