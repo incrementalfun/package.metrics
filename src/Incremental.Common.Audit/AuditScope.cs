@@ -3,15 +3,16 @@ using Incremental.Common.Audit.Store;
 
 namespace Incremental.Common.Audit;
 
-public class AuditScope : IAuditScope
+public class AuditScope<TAuditEvent> : IAuditScope where TAuditEvent : AuditEvent
 {
     private readonly IAuditStore _store;
-    private readonly AuditEvent _event;
-    
+    private readonly TAuditEvent _event;
+
+    private CancellationToken _cancellationToken;
     private bool _disposed;
     private bool _cancelled;
 
-    public AuditScope(IAuditStore store, AuditEvent @event)
+    public AuditScope(IAuditStore store, TAuditEvent @event)
     {
         _store = store;
         _event = @event;
@@ -19,8 +20,9 @@ public class AuditScope : IAuditScope
         _disposed = false;
         _cancelled = false;
     }
-    protected internal async Task<AuditScope> StartAsync(CancellationToken cancellationToken)
+    protected internal async Task<AuditScope<TAuditEvent>> StartAsync(CancellationToken cancellationToken = default)
     {
+        _cancellationToken = cancellationToken;
         _event.Start();
         return await Task.FromResult(this);
     }
@@ -42,7 +44,7 @@ public class AuditScope : IAuditScope
         if (!_cancelled)
         {
             _event.End();
-            await _store.SaveAsync(_event);
+            await _store.SaveAsync(_event, _cancellationToken);
         }
     }
 }
