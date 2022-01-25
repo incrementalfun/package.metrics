@@ -1,6 +1,6 @@
-namespace Incremental.Common.Audit.Store;
+namespace Incremental.Common.Audit.Sink;
 
-public interface IAuditStore
+public interface IAuditSink
 {
     public Task SaveAsync<TAuditEvent>(TAuditEvent auditEvent, CancellationToken cancellationToken = default);
 }

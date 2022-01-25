@@ -1,20 +1,20 @@
 using Incremental.Common.Audit.Events;
-using Incremental.Common.Audit.Store;
+using Incremental.Common.Audit.Sink;
 
 namespace Incremental.Common.Audit.Scope;
 
 public class AuditScope<TAuditEvent> : IAuditScope where TAuditEvent : AuditEvent
 {
-    private readonly IAuditStore _store;
+    private readonly IAuditSink _sink;
     private readonly TAuditEvent _event;
 
     private CancellationToken _cancellationToken;
     private bool _disposed;
     private bool _cancelled;
 
-    public AuditScope(IAuditStore store, TAuditEvent @event)
+    public AuditScope(IAuditSink sink, TAuditEvent @event)
     {
-        _store = store;
+        _sink = sink;
         _event = @event;
 
         _disposed = false;
@@ -44,7 +44,7 @@ public class AuditScope<TAuditEvent> : IAuditScope where TAuditEvent : AuditEven
         if (!_cancelled)
         {
             _event.End();
-            await _store.SaveAsync(_event, _cancellationToken);
+            await _sink.SaveAsync(_event, _cancellationToken);
         }
     }
 }

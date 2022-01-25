@@ -1,11 +1,9 @@
-using System;
 using System.Threading.Tasks;
 using Incremental.Common.Audit.Events;
 using Incremental.Common.Audit.Events.WellKnown;
 using Incremental.Common.Audit.Extensions;
-using Incremental.Common.Audit.Store;
+using Incremental.Common.Audit.Sink;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using NUnit.Framework;
 
@@ -14,7 +12,7 @@ namespace Incremental.Common.Audit.Testing;
 public class AuditScopeFactoryExtensionsTests
 {
     private IAuditScopeFactory _auditScopeFactory = null!;
-    private readonly Mock<IAuditStore> _auditStoreMock = new();
+    private readonly Mock<IAuditSink> _auditStoreMock = new();
 
     [SetUp]
     public void Setup()
@@ -24,7 +22,7 @@ public class AuditScopeFactoryExtensionsTests
         services.AddLogging();
 
         services.AddTransient<IAuditEventFactory, AuditEventFactory>();
-        services.AddTransient(typeof(IAuditStore), _ => _auditStoreMock.Object);
+        services.AddTransient(typeof(IAuditSink), _ => _auditStoreMock.Object);
         services.AddTransient<IAuditScopeFactory, AuditScopeFactory>();
         
         var provider = services.BuildServiceProvider();

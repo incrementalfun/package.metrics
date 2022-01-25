@@ -1,7 +1,6 @@
 using Incremental.Common.Audit.Events;
-using Incremental.Common.Audit.Events.WellKnown;
 using Incremental.Common.Audit.Scope;
-using Incremental.Common.Audit.Store;
+using Incremental.Common.Audit.Sink;
 using Microsoft.Extensions.Logging;
 
 namespace Incremental.Common.Audit;
@@ -9,13 +8,13 @@ namespace Incremental.Common.Audit;
 public class AuditScopeFactory : IAuditScopeFactory
 {
     private readonly ILogger<AuditScopeFactory> _logger;
-    private readonly IAuditStore _auditStore;
+    private readonly IAuditSink _auditSink;
     private readonly IAuditEventFactory _auditEventFactory;
 
-    public AuditScopeFactory(ILogger<AuditScopeFactory> logger, IAuditStore auditStore, IAuditEventFactory auditEventFactory)
+    public AuditScopeFactory(ILogger<AuditScopeFactory> logger, IAuditSink auditSink, IAuditEventFactory auditEventFactory)
     {
         _logger = logger;
-        _auditStore = auditStore;
+        _auditSink = auditSink;
         _auditEventFactory = auditEventFactory;
     }
 
@@ -23,7 +22,7 @@ public class AuditScopeFactory : IAuditScopeFactory
         where TAuditEvent : AuditEvent, new()
     {
         return await new AuditScope<TAuditEvent>(
-                store: _auditStore, 
+                sink: _auditSink, 
                 @event: await _auditEventFactory.CreateAuditEventAsync<TAuditEvent>(eventName,cancellationToken))
             .StartAsync(cancellationToken);
     }
