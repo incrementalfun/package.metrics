@@ -2,6 +2,12 @@ namespace Incremental.Common.Audit;
 
 public class AuditScope : IAuditScope
 {
+    private bool _disposed;
+
+    public AuditScope()
+    {
+        _disposed = false;
+    }
     protected internal async Task<AuditScope> StartAsync(CancellationToken cancellationToken)
     {
         return await Task.FromResult(this);
@@ -9,11 +15,15 @@ public class AuditScope : IAuditScope
 
     public async Task CancelAsync()
     {
-        throw new NotImplementedException();
+        await DisposeAsync();
     }
     
     public async ValueTask DisposeAsync()
     {
-        throw new NotImplementedException();
+        if (_disposed)
+        {
+            return;
+        }
+        _disposed = true;
     }
 }
