@@ -18,17 +18,17 @@ public class AuditScopeFactory : IAuditScopeFactory
         _auditEventFactory = auditEventFactory;
     }
 
-    public async Task<IAuditScope> CreateScopeAsync<TAuditEvent>(CancellationToken cancellationToken = default) 
+    public async Task<IAuditScope> CreateScopeAsync<TAuditEvent>(string eventName, CancellationToken cancellationToken = default) 
         where TAuditEvent : AuditEvent, new()
     {
         return await new AuditScope<TAuditEvent>(
                 store: _auditStore, 
-                @event: await _auditEventFactory.CreateAuditEventAsync<TAuditEvent>(cancellationToken))
+                @event: await _auditEventFactory.CreateAuditEventAsync<TAuditEvent>(eventName,cancellationToken))
             .StartAsync(cancellationToken);
     }
     
-    public async Task<IAuditScope> CreateScopeAsync(CancellationToken cancellationToken = default)
+    public async Task<IAuditScope> CreateScopeAsync(string eventName, CancellationToken cancellationToken = default)
     {
-        return await CreateScopeAsync<BasicAuditEvent>(cancellationToken);
+        return await CreateScopeAsync<BasicAuditEvent>(eventName, cancellationToken);
     }
 }

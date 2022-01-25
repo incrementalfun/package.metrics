@@ -10,7 +10,7 @@ namespace Incremental.Common.Audit.Testing;
 public class AuditScopeFactoryTests
 {
     private IAuditScopeFactory _auditScopeFactory = null!;
-    private Mock<IAuditStore> _auditStoreMock = new Mock<IAuditStore>();
+    private readonly Mock<IAuditStore> _auditStoreMock = new();
 
     [SetUp]
     public void Setup()
@@ -24,7 +24,7 @@ public class AuditScopeFactoryTests
     [Test]
     public async Task Creates_AuditScope()
     {
-        var auditScope = await _auditScopeFactory.CreateScopeAsync();
+        var auditScope = await _auditScopeFactory.CreateScopeAsync("testEvent");
         
         Assert.IsNotNull(auditScope);
     }
@@ -32,7 +32,7 @@ public class AuditScopeFactoryTests
     [Test]
     public async Task Creates_AuditScope_With_Generic_AuditEvent()
     {
-        await using (var auditScope = await _auditScopeFactory.CreateScopeAsync<TestingAuditEvent>())
+        await using (var unused = await _auditScopeFactory.CreateScopeAsync<TestingAuditEvent>("testEvent"))
         {
             
         }
