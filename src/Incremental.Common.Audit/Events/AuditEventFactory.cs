@@ -2,8 +2,9 @@ namespace Incremental.Common.Audit.Events;
 
 public class AuditEventFactory : IAuditEventFactory
 {
-    public async Task<AuditEvent> CreateAuditEventAsync(CancellationToken cancellationToken)
+    public async Task<TAuditEvent> CreateAuditEventAsync<TAuditEvent>(CancellationToken cancellationToken) 
+        where TAuditEvent : AuditEvent, new()
     {
-        return new AuditEvent();
+        return new TAuditEvent();
     }
 }
