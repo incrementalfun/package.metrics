@@ -1,7 +1,7 @@
 using Incremental.Common.Audit.Events;
 using Incremental.Common.Audit.Store;
 
-namespace Incremental.Common.Audit;
+namespace Incremental.Common.Audit.Scope;
 
 public class AuditScope<TAuditEvent> : IAuditScope where TAuditEvent : AuditEvent
 {

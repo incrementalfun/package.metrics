@@ -1,4 +1,5 @@
 using Incremental.Common.Audit.Events.WellKnown;
+using Incremental.Common.Audit.Scope;
 
 namespace Incremental.Common.Audit.Extensions;
 

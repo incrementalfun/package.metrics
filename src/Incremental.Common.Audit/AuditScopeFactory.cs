@@ -1,5 +1,6 @@
 using Incremental.Common.Audit.Events;
 using Incremental.Common.Audit.Events.WellKnown;
+using Incremental.Common.Audit.Scope;
 using Incremental.Common.Audit.Store;
 using Microsoft.Extensions.Logging;
 
