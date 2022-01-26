@@ -1,7 +1,6 @@
 using Incremental.Common.Metrics.Events;
-using Incremental.Common.Metrics.Scope;
 
-namespace Incremental.Common.Metrics;
+namespace Incremental.Common.Metrics.Scope;
 
 public interface IMetricScopeFactory
 {

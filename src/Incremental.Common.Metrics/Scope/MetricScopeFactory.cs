@@ -1,9 +1,8 @@
 using Incremental.Common.Metrics.Events;
-using Incremental.Common.Metrics.Scope;
 using Incremental.Common.Metrics.Sink;
 using Microsoft.Extensions.Logging;
 
-namespace Incremental.Common.Metrics;
+namespace Incremental.Common.Metrics.Scope;
 
 public class MetricScopeFactory : IMetricScopeFactory
 {

@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Incremental.Common.Metrics.Events;
 using Incremental.Common.Metrics.Events.WellKnown;
+using Incremental.Common.Metrics.Scope;
 using Incremental.Common.Metrics.Sink;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
