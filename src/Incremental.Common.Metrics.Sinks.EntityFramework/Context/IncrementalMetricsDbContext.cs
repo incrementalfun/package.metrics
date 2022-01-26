@@ -9,7 +9,7 @@ public class IncrementalMetricsDbContext : DbContext
     {
     }
 
-    public IncrementalMetricsDbContext(DbContextOptions<IncrementalMetricsDbContext> options) : base(options)
+    public IncrementalMetricsDbContext(DbContextOptions options) : base(options)
     {
     }
 
