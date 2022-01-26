@@ -41,7 +41,7 @@ public class MetricScope<TAuditEvent> : IMetricScope where TAuditEvent : MetricE
         }
         _disposed = true;
 
-        if (!_cancelled)
+        if (!_cancelled && !_cancellationToken.IsCancellationRequested)
         {
             _event.End();
             await _sink.SaveAsync(_event, _cancellationToken);
