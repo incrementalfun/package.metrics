@@ -15,7 +15,7 @@ public static class ServiceCollectionExtensions
         
         services.AddDbContext<TContext>(dbContextOptions);
         
-        services.AddTransient<IMetricSink, EntityFrameworkMetricSink>();
+        services.AddTransient<IMetricSink, EntityFrameworkMetricSink<TContext>>();
 
         return services;
     }
