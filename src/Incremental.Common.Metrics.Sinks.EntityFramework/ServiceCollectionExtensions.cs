@@ -13,7 +13,7 @@ public static class ServiceCollectionExtensions
         var temporal = new DbContextOptionsBuilder();
         dbContextOptions.Invoke(temporal);
         
-        services.AddDbContext<IncrementalMetricsDbContext>(dbContextOptions);
+        services.AddDbContext<TContext>(dbContextOptions);
         
         services.AddTransient<IMetricSink, EntityFrameworkMetricSink>();
 
