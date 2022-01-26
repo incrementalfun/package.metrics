@@ -17,12 +17,12 @@ public class MetricScopeFactory : IMetricScopeFactory
         _metricEventFactory = metricEventFactory;
     }
 
-    public async Task<IMetricScope> CreateScopeAsync<TAuditEvent>(string eventName, CancellationToken cancellationToken = default) 
-        where TAuditEvent : MetricEvent, new()
+    public async Task<IMetricScope> CreateScopeAsync<TMetricEvent>(string eventName, Action<TMetricEvent>? configure = default, CancellationToken cancellationToken = default) 
+        where TMetricEvent : MetricEvent, new()
     {
-        return await new MetricScope<TAuditEvent>(
+        return await new MetricScope<TMetricEvent>(
                 sink: _metricSink, 
-                @event: await _metricEventFactory.CreateMetricEventAsync<TAuditEvent>(eventName,cancellationToken))
+                @event: await _metricEventFactory.CreateMetricEventAsync<TMetricEvent>(eventName, configure, cancellationToken))
             .StartAsync(cancellationToken);
     }
 }

@@ -11,7 +11,8 @@ public class MetricEventFactory : IMetricEventFactory
         _serviceScopeFactory = serviceScopeFactory;
     }
 
-    public async Task<TMetricEvent> CreateMetricEventAsync<TMetricEvent>(string name, CancellationToken cancellationToken = default) 
+    public async Task<TMetricEvent> CreateMetricEventAsync<TMetricEvent>(string name, Action<TMetricEvent>? configure = default,
+        CancellationToken cancellationToken = default) 
         where TMetricEvent : MetricEvent, new()
     {
         await using var scope = _serviceScopeFactory.CreateAsyncScope();
@@ -27,6 +28,8 @@ public class MetricEventFactory : IMetricEventFactory
         {
             await handler.ConfigureAsync(@event, cancellationToken);
         }
+
+        configure?.Invoke(@event);
 
         return @event;
     }
