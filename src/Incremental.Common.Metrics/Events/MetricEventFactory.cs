@@ -16,7 +16,7 @@ public class MetricEventFactory : IMetricEventFactory
     {
         await using var scope = _serviceScopeFactory.CreateAsyncScope();
 
-        var handler = scope.ServiceProvider.GetService<IMetricEventConfigurationHandler<TMetricEvent>>();
+        var handler = scope.ServiceProvider.GetService<IMetricEventFactoryConfigurationHandler<TMetricEvent>>();
         
         var @event = new TMetricEvent
         {
