@@ -4,11 +4,24 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Title>Incremental.Common.Metrics</Title>
+        <Description>Simple metrics and usage logger.</Description>
+        <Authors>Lucas Maximiliano Marino</Authors>
+        <PackageProjectUrl>https://github.com/incrementalfun/package.metrics</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/incrementalfun/package.metrics</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2022</Copyright>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
     </ItemGroup>
 
 </Project>
